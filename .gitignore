@@ -1,0 +1,12 @@
+# Per-install configuration - copy config.php.example and edit
+config/config.php
+
+# Editor / OS noise
+*~
+*.swp
+.DS_Store
+Thumbs.db
+
+# Local backups made during upgrades
+*.bak
+*.bak-*

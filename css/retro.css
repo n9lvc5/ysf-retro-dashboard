@@ -1,0 +1,518 @@
+/* ============================================================
+   Retro Radio theme for YSFReflector-Dashboard (DG9VH)
+   Amber phosphor on black, scanline overlay.
+   Local file - not part of upstream. Safe from dashboard updates.
+   Loaded from index.php via <link rel="stylesheet" href="css/retro.css">
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap');
+
+:root {
+  --phos:        #ffb000;   /* primary amber phosphor            */
+  --phos-dim:    #b37a00;   /* dimmed amber - borders, labels    */
+  --phos-faint:  #4a3200;   /* very dim - gridlines              */
+  --phos-hot:    #ffd166;   /* highlight / hover                 */
+  --bg:          #0a0a0a;
+  --bg-panel:    #101010;
+  --bg-panel-2:  #161311;
+  --red:         #ff3b30;
+  --green:       #46d160;
+  --glow:        0 0 6px rgba(255, 176, 0, .55);
+  --glow-strong: 0 0 10px rgba(255, 176, 0, .85);
+  --mono: 'Share Tech Mono', ui-monospace, 'Consolas', 'Courier New', monospace;
+  --display: 'VT323', 'Share Tech Mono', ui-monospace, monospace;
+}
+
+/* ---------- base ---------- */
+
+/* Global type scale. Everything below is in rem, so raising this one number
+   enlarges the whole dashboard consistently. Bootstrap's default is 16px. */
+html { font-size: 19px; }
+
+html, body {
+  background: var(--bg) !important;
+  color: var(--phos);
+  font-family: var(--mono);
+  letter-spacing: .02em;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 50% 0%, rgba(255,176,0,.07) 0%, transparent 60%),
+    radial-gradient(ellipse at 50% 120%, rgba(255,176,0,.05) 0%, transparent 55%);
+  background-attachment: fixed;
+  padding-bottom: 2rem;
+}
+
+/* Scanline overlay - purely decorative, never blocks clicks.
+   Deliberately subtle: no blend mode (multiply turned any light surface into
+   grey bars over the text) and low alpha, so glyphs stay crisp. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0,0,0,0)   0px,
+    rgba(0,0,0,0)   3px,
+    rgba(0,0,0,.10) 4px,
+    rgba(0,0,0,.10) 5px
+  );
+}
+
+/* subtle CRT vignette */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  box-shadow: inset 0 0 160px 40px rgba(0,0,0,.9);
+}
+
+a, a:visited { color: var(--phos); text-decoration: none; }
+a:hover      { color: var(--phos-hot); text-shadow: var(--glow); text-decoration: none; }
+
+::selection { background: var(--phos); color: #000; }
+
+/* ---------- navbar ---------- */
+
+.navbar, .navbar.bg-dark {
+  background: #000 !important;
+  border-bottom: 1px solid var(--phos-dim);
+  box-shadow: 0 2px 18px rgba(255,176,0,.18);
+  padding: .5rem 1rem;
+}
+
+.navbar-brand, .navbar .navbar-brand {
+  font-family: var(--display);
+  font-size: 1.8rem;
+  color: var(--phos) !important;
+  text-shadow: var(--glow);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  white-space: normal;
+}
+
+/* ---------- cards / panels ---------- */
+
+.card {
+  background: var(--bg-panel);
+  border: 1px solid var(--phos-faint);
+  border-radius: 2px;
+  margin-bottom: 1rem;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.6), 0 4px 22px rgba(0,0,0,.7);
+}
+
+.card-header {
+  background: linear-gradient(180deg, var(--bg-panel-2), #0d0b0a);
+  border-bottom: 1px solid var(--phos-faint);
+  padding: .5rem .9rem;
+  /* some panels (Currently TXing) use a bare card-header with no <h2> */
+  font-family: var(--display);
+  font-size: 1.85rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--phos);
+  text-shadow: var(--glow);
+}
+
+.card-header h2,
+.card-header h2 strong {
+  font-family: var(--display);
+  font-size: 1.85rem;
+  font-weight: normal;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--phos);
+  text-shadow: var(--glow);
+  margin: 0;
+}
+
+/* prefix panel titles with a terminal marker */
+.card-header h2 strong::before { content: ">> "; color: var(--phos-dim); }
+
+.card-body { color: var(--phos-dim); }
+
+/* ---------- tables ---------- */
+
+.table, .table-condensed {
+  color: var(--phos);
+  background: transparent;
+  font-family: var(--mono);
+  font-size: 1.05rem;
+  margin-bottom: 0;
+}
+
+.table thead th {
+  background: #0d0b0a;
+  color: var(--phos-dim);
+  border-bottom: 1px solid var(--phos-faint) !important;
+  border-top: none !important;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font-size: .92rem;
+  font-weight: normal;
+  white-space: nowrap;
+}
+
+.table td {
+  border-top: 1px solid rgba(74,50,0,.5) !important;
+  padding: .45rem .8rem;
+  vertical-align: middle;
+}
+
+.table tbody tr:hover td {
+  background: rgba(255,176,0,.07);
+  color: var(--phos-hot);
+  text-shadow: var(--glow);
+}
+
+/* callsign columns read as data, not prose */
+.table td[nowrap] { font-weight: bold; letter-spacing: .06em; }
+
+/* stripe without washing out the phosphor */
+.table tbody tr:nth-child(even) td { background: rgba(255,176,0,.022); }
+
+/* ---------- DataTables: kill the stock white row backgrounds ----------
+   jquery.dataTables.min.css hard-codes #ffffff on tbody rows and light greys
+   on striped/hover/sorted cells. Those beat our .table rules, which is what
+   made text unreadable under the scanlines. Neutralise all of them. */
+
+table.dataTable,
+table.dataTable tbody,
+table.dataTable tbody tr,
+table.dataTable tbody tr.odd,
+table.dataTable tbody tr.even,
+table.dataTable tbody td,
+table.dataTable.stripe tbody tr.odd,
+table.dataTable.display tbody tr.odd,
+table.dataTable.stripe tbody tr.even,
+table.dataTable.display tbody tr.even {
+  background-color: transparent !important;
+  color: var(--phos);
+}
+
+/* sorted-column tinting (the .sorting_1/2/3 greys) */
+table.dataTable tbody tr > .sorting_1,
+table.dataTable tbody tr > .sorting_2,
+table.dataTable tbody tr > .sorting_3,
+table.dataTable.display tbody tr.odd > .sorting_1,
+table.dataTable.display tbody tr.even > .sorting_1,
+table.dataTable.order-column tbody tr > .sorting_1,
+table.dataTable.order-column tbody tr > .sorting_2,
+table.dataTable.order-column tbody tr > .sorting_3 {
+  background-color: rgba(255,176,0,.05) !important;
+  color: var(--phos);
+}
+
+/* hover */
+table.dataTable.hover tbody tr:hover,
+table.dataTable.display tbody tr:hover,
+table.dataTable.hover tbody tr:hover > .sorting_1,
+table.dataTable.display tbody tr:hover > .sorting_1 {
+  background-color: rgba(255,176,0,.10) !important;
+  color: var(--phos-hot) !important;
+}
+
+/* Bootstrap's own striping also assumes a light surface */
+.table-striped tbody tr:nth-of-type(odd),
+.table-striped tbody tr:nth-of-type(odd) td {
+  background-color: rgba(255,176,0,.03);
+  color: var(--phos);
+}
+.table-hover tbody tr:hover,
+.table-hover tbody tr:hover td {
+  background-color: rgba(255,176,0,.10);
+  color: var(--phos-hot);
+}
+
+/* ---------- DataTables chrome ---------- */
+
+.dataTables_wrapper { padding: .5rem .75rem .25rem; }
+
+.dataTables_wrapper .dataTables_filter input,
+.dataTables_wrapper .dataTables_length select {
+  background: #000;
+  color: var(--phos);
+  border: 1px solid var(--phos-faint);
+  border-radius: 2px;
+  padding: .15rem .4rem;
+  font-family: var(--mono);
+}
+.dataTables_wrapper .dataTables_filter input:focus,
+.dataTables_wrapper .dataTables_length select:focus {
+  outline: none;
+  border-color: var(--phos);
+  box-shadow: var(--glow);
+}
+
+.dataTables_wrapper .dataTables_filter,
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_info {
+  color: var(--phos-dim) !important;
+  font-size: .95rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  color: var(--phos-dim) !important;
+  background: transparent !important;
+  border: 1px solid transparent !important;
+  border-radius: 2px;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.current,
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+  color: #000 !important;
+  background: var(--phos) !important;
+  border-color: var(--phos) !important;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
+  color: #3a2c10 !important;
+}
+
+table.dataTable thead th.sorting,
+table.dataTable thead th.sorting_asc,
+table.dataTable thead th.sorting_desc { color: var(--phos-dim); }
+
+/* ---------- stat tiles ---------- */
+
+.rr-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+  gap: .75rem;
+  margin: 1rem 0;
+}
+
+.rr-tile {
+  background: linear-gradient(180deg, var(--bg-panel-2), #0b0a09);
+  border: 1px solid var(--phos-faint);
+  border-radius: 2px;
+  padding: .8rem .6rem .7rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* thin bright rule across the top of each tile */
+.rr-tile::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--phos), transparent);
+  opacity: .7;
+}
+
+.rr-tile-value {
+  font-family: var(--display);
+  /* One fluid rule for ALL tiles so they stay visually uniform: shrinks with
+     the viewport instead of needing per-tile overrides for longer values. */
+  font-size: clamp(1.9rem, 4.2vw, 3.1rem);
+  line-height: 1.05;
+  min-height: 1.05em;          /* equal value-row height across every tile */
+  color: var(--phos);
+  text-shadow: var(--glow-strong);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* secondary line inside a tile - e.g. the public IP under the UDP port */
+.rr-tile-sub {
+  font-family: var(--mono);
+  font-size: 1.05rem;
+  letter-spacing: .04em;
+  color: var(--phos-hot);
+  text-shadow: 0 0 5px rgba(255,176,0,.4);
+  margin-top: .15rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rr-tile-label {
+  font-size: .85rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--phos-dim);
+  margin-top: .35rem;
+}
+
+/* ---- CPU temperature states ----
+   warm (>= TEMPERATUREHIGHLEVEL): amber, slow pulse - noticeable, not alarming
+   hot  (>= RR_TEMP_CRITICAL):     red, hard blink   - demands attention      */
+
+.rr-tile.is-warm .rr-tile-value {
+  color: #ff8c00;
+  text-shadow: 0 0 10px rgba(255,140,0,.75);
+  animation: rr-warm-pulse 2s ease-in-out infinite;
+}
+.rr-tile.is-warm { border-color: rgba(255,140,0,.55); }
+
+.rr-tile.is-hot .rr-tile-value {
+  color: var(--red);
+  text-shadow: 0 0 12px rgba(255,59,48,.95);
+  animation: rr-hot-blink .8s steps(1, end) infinite;
+}
+.rr-tile.is-hot {
+  border-color: var(--red);
+  animation: rr-hot-frame .8s steps(1, end) infinite;
+}
+.rr-tile.is-hot .rr-tile-label { color: var(--red); }
+
+/* steps(1,end) gives a true on/off blink rather than a soft fade */
+@keyframes rr-hot-blink {
+  0%,   49%  { opacity: 1; }
+  50%, 100%  { opacity: .12; }
+}
+@keyframes rr-hot-frame {
+  0%,   49%  { background: rgba(255,59,48,.14); box-shadow: 0 0 18px rgba(255,59,48,.45); }
+  50%, 100%  { background: transparent;         box-shadow: none; }
+}
+@keyframes rr-warm-pulse {
+  0%, 100% { opacity: 1;   }
+  50%      { opacity: .55; }
+}
+
+/* ---------- ON AIR indicator ---------- */
+
+/* Lives under the "Currently TXing" header. Sized to be readable across a
+   room - roughly double the original navbar badge. */
+.rr-onair-bar {
+  display: flex;
+  justify-content: center;
+  padding: .7rem .9rem .5rem;
+  border-bottom: 1px solid var(--phos-faint);
+}
+
+.rr-onair {
+  display: inline-flex;
+  align-items: center;
+  gap: .9rem;
+  font-family: var(--display);
+  font-size: 3.2rem;
+  line-height: 1.1;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  padding: .25rem 1.6rem;
+  border: 2px solid var(--phos-faint);
+  border-radius: 3px;
+  color: var(--phos-dim);
+  white-space: nowrap;
+}
+
+.rr-onair .rr-dot {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: #2a2a2a;
+  box-shadow: inset 0 0 5px #000;
+  flex: 0 0 auto;
+}
+
+/* live state - a hard on/off blink, not a soft fade, so it is unmissable */
+.rr-onair.is-live {
+  color: #fff;
+  border-color: var(--red);
+  animation: rr-onair-blink .8s steps(1, end) infinite;
+}
+.rr-onair.is-live .rr-dot {
+  background: var(--red);
+  box-shadow: 0 0 14px 3px rgba(255,59,48,.95);
+}
+
+@keyframes rr-onair-blink {
+  0%,  49%  {
+    opacity: 1;
+    background: rgba(255,59,48,.22);
+    box-shadow: 0 0 26px rgba(255,59,48,.6);
+    text-shadow: 0 0 14px rgba(255,59,48,.9);
+  }
+  50%, 100% {
+    opacity: .28;
+    background: transparent;
+    box-shadow: none;
+    text-shadow: none;
+  }
+}
+
+/* new-row flash when live update brings in a fresh entry */
+@keyframes rr-flash {
+  from { background: rgba(255,176,0,.45); color: #000; }
+  to   { background: transparent; }
+}
+.rr-new td { animation: rr-flash 1.6s ease-out; }
+
+/* ---------- progress bars (sysinfo/disk) ---------- */
+
+.progress {
+  background: #000;
+  border: 1px solid var(--phos-faint);
+  border-radius: 2px;
+  height: 1.1rem;
+}
+.progress-bar {
+  background: var(--phos) !important;
+  color: #000;
+  font-family: var(--mono);
+  font-size: .85rem;
+  text-shadow: none;
+}
+.progress-bar-warning { background: #ff8c00 !important; }
+.progress-bar-danger  { background: var(--red) !important; color: #fff; }
+.progress-bar-success { background: var(--green) !important; }
+
+/* ---------- footer ---------- */
+
+body > .card:last-of-type .card-body {
+  font-size: .95rem;
+  letter-spacing: .06em;
+  color: var(--phos-dim);
+  text-transform: uppercase;
+}
+
+/* ---------- headings the theme inherits ---------- */
+
+h1, h2, h3, h4, h5 {
+  font-family: var(--display);
+  color: var(--phos);
+  text-shadow: var(--glow);
+  letter-spacing: .08em;
+}
+
+/* the hamqsl solar banner is a colour image - tone it into the theme */
+img { filter: sepia(.5) saturate(1.4) hue-rotate(-14deg) brightness(.92); }
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 576px) {
+  .navbar-brand, .navbar .navbar-brand { font-size: 1.25rem; }
+  .card-header h2, .card-header h2 strong { font-size: 1.45rem; }
+  .table { font-size: .98rem; }
+  .rr-onair { font-size: 2rem; padding: .2rem .9rem; gap: .6rem; }
+  .rr-onair .rr-dot { width: 15px; height: 15px; }
+}
+
+/* respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .rr-onair.is-live { animation: none; }
+  .rr-new td { animation: none; }
+  /* colour still conveys the state, so nothing is lost by stopping the motion */
+  .rr-tile.is-hot,
+  .rr-tile.is-hot .rr-tile-value,
+  .rr-tile.is-warm .rr-tile-value { animation: none; opacity: 1; }
+  .rr-tile.is-hot { background: rgba(255,59,48,.14); }
+}
+
+/* caption under a capped table (e.g. Alltime Heard limited to N entries) */
+.rr-cap-note {
+  font-size: .85rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--phos-dim);
+  border-top: 1px solid var(--phos-faint);
+  padding: .45rem .9rem;
+}

@@ -1,0 +1,7 @@
+# This project is deployed to Linux web servers. Keep LF in the repository and
+# in checkouts so PHP/CSS/JS files never arrive with CRLF line endings.
+* text=auto eol=lf
+
+*.ico binary
+*.png binary
+*.jpg binary

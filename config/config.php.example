@@ -1,0 +1,20 @@
+<?php
+# Copy this file to config.php and edit to taste.
+# Upstream generated this via setup.php; that file is intentionally NOT
+# shipped here because leaving it on a public server is a security hole.
+
+date_default_timezone_set('UTC');
+define("YSFREFLECTORLOGPATH", "/var/log/YSFReflector/");
+define("YSFREFLECTORLOGPREFIX", "YSFReflector");
+define("YSFREFLECTORINIPATH", "/etc/");
+define("YSFREFLECTORINIFILENAME", "YSFReflector.ini");
+define("YSFREFLECTORPATH", "/usr/local/bin/");
+define("TIMEZONE", "UTC");
+define("LOGO", "");   // URL of a banner image, or "" for none
+define("REFRESHAFTER", "60");
+define("SHOWPROGRESSBARS", "on");
+define("TEMPERATUREALERT", "on");
+define("SHOWQRZ", "on");
+define("SHOWOLDMHEARD", "60");
+define("TEMPERATUREHIGHLEVEL", "60");
+
