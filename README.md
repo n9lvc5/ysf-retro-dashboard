@@ -7,24 +7,9 @@ for [G4KLX YSFReflector](https://github.com/g4klx/YSFReflector).
 Upstream is explicitly no longer developed. This fork keeps its data layer,
 replaces the presentation, and removes the full-page refresh.
 
-```
-┌──────────────────────────────────────────────────────────────────────┐
-│  MY REFLECTOR / MY REFLECTOR (#YSF12345)      YSFREFLECTOR 20210824  │
-├──────────────────────────────────────────────────────────────────────┤
-│  ┌────────┐ ┌────────────┐ ┌──────────┐ ┌────────┐ ┌──────────────┐  │
-│  │   03   │ │   W1AW     │ │  104°F   │ │ 1h 08m │ │    42000     │  │
-│  │        │ │            │ │          │ │        │ │ 203.0.113.7  │  │
-│  │GATEWAYS│ │ LAST HEARD │ │ CPU TEMP │ │ UPTIME │ │ UDP PORT/IP  │  │
-│  └────────┘ └────────────┘ └──────────┘ └────────┘ └──────────────┘  │
-│                                                                      │
-│  >> CURRENTLY TXING                                                  │
-│                     ●  ON AIR W1AW                                   │
-│                                                                      │
-│  >> CONNECTED YSFGATEWAYS                                            │
-│     N0CALL          2026-08-17 09:41:28                              │
-│     My Friend's Hub 2026-08-17 09:41:28                              │
-└──────────────────────────────────────────────────────────────────────┘
-```
+![YSF Retro Dashboard](docs/screenshot.png)
+
+_Live during a transmission: the ON AIR badge blinks red with the transmitting callsign._
 
 ## What this fork adds
 
