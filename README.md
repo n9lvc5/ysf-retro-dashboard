@@ -73,7 +73,7 @@ Developed against Raspberry Pi OS Bookworm / Debian 12, PHP 8.2, on a Pi 5.
 # back up whatever is there now
 sudo cp -a /var/www/html /var/www/html.bak-$(date +%F)
 
-git clone https://github.com/YOUR-GITHUB-USER/ysf-retro-dashboard.git
+git clone https://github.com/n9lvc5/ysf-retro-dashboard.git
 sudo cp -a ysf-retro-dashboard/. /var/www/html/
 
 # create your config

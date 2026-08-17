@@ -4,7 +4,7 @@
  * checked out as a git repository (see include/functions.php).
  */
 define("FORK_NAME", "YSF Retro Dashboard");
-define("FORK_REPO", "https://github.com/YOUR-GITHUB-USER/ysf-retro-dashboard");
+define("FORK_REPO", "https://github.com/n9lvc5/ysf-retro-dashboard");
 define("UPSTREAM_VERSION", "DG9VH 20210331-2");
 define("VERSION", "1.0.0 (" . getGitVersion() . ")");
 ?>
